@@ -12,7 +12,6 @@ client.connect();
 console.log("hi connected");
 console.log(client);
 app.post("/submit", function (req, res) {
-  console.log("hi");
   const { problemId, userId, code, language } = req.body;
   client.lPush(
     "submissions",

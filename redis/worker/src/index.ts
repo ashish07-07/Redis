@@ -9,7 +9,7 @@ async function Main() {
     console.log(response);
     await new Promise((resolve) => setTimeout(resolve, 100));
 
-    console.log("processed re beta ");
+    console.log("processed  ");
   }
 }
 
