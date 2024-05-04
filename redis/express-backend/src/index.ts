@@ -1,18 +1,27 @@
 import express from "express";
 import { createClient } from "redis";
 
-const client = createClient();
-client.connect();
 const app = express();
 
 app.use(express.json());
 
-app.post("/submit ", function (req: any, res: any) {
-  const { problem, userId, code, language } = req.body;
+const client = createClient();
+
+client.connect();
+
+console.log("hi connected");
+console.log(client);
+app.post("/submit", function (req, res) {
+  console.log("hi");
+  const { problemId, userId, code, language } = req.body;
+  client.lPush(
+    "submissions",
+    JSON.stringify({ problemId, userId, code, language })
+  );
+
+  res.json({
+    message: "successfull added",
+  });
 });
 
-// const PORT = 3000;
-
-// app.listen(PORT, function (req: any, resa: any) {
-//   console.log(`server listening on port ${PORT}`);
-// });
+app.listen(3000);
